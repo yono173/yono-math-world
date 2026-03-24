@@ -1,3 +1,114 @@
+## 高中范围的基本估计
+高中范围内最简单的估计是基于基本不等式
+$$
+n!=1 \cdot 2  \cdots n < 
+(\frac{1+2 \cdots +n}{n})^2=
+(\frac{n+1}{2})^2
+$$
+更进一步的,我们有如下高考题的估计
+## 2023天津高考
+(2023年天津高考)证明:
+$$ 
+\frac{5}{6} < \ln(n!) - \left(n + \frac{1}{2}\right)\ln(n) + n \leqslant 1.
+$$
+这个题也就是要我们研究
+$$
+\ln(n!) - \left(n + \frac{1}{2}\right)\ln(n) + n
+$$
+的性质(记为$f(n)$)，我们先看单调性
+
+$f(n+1)-f(n)$=
+$$
+\ln(n+1) + \ln(n!) - \left(n + \frac{3}{2}\right)\ln(n+1) + n + 1 - \ln(n!) + \left(n + \frac{1}{2}\right)\ln(n)-n
+$$
+即
+$$
+1 - \left(n + \frac{1}{2}\right)\ln\left(1 + \frac{1}{n}\right)
+$$
+利用导数容易发现$f(n+1)-f(n)<0$，故$f(n)$单调减
+
+于是有
+$$
+f(n)\leq f(1)=1
+$$
+#### 不等式左边
+对于左边则要复杂不少，
+
+高中范围内这种类型问题相对普适的方法是作差分后逐项估计
+
+具体的做法如下
+$$
+\frac{5}{6}= 1 - \frac{1}{6} \sum_{i=1}^{n-1} \left( \frac{1}{i} - \frac{1}{i+1} \right)
+$$
+$$
+f(n)=f(1) - \sum_{i=1}^{n-1} \left( f(i) - f(i+1) \right)
+$$
+这样问题就变成了比较
+$$\frac{1}{6}\left( \frac{1}{i} - \frac{1}{i+1} \right)$$
+$$ \left( f(i) - f(i+1) \right)=
+1 - \left(i + \frac{1}{2}\right)\ln\left(1 + \frac{1}{i}\right)$$
+两者的大小关系，
+这就是一个比较简单的求导问题了，接下来我们只需要构造函数求导即可（具体证明略）
+
+可以看到，这种解法的核心有几个，一个是发现f(n)的单调性，另一个是作差分逐项估计的想法
+
+延着这个想法，我们可以得到n！更加深入的估计
+
+
+
+# stolz定理
+设数列 ${b_n}$ 满足：
+严格单调递增；
+当 $n \to \infty$时，$b_n \to +\infty$（或 $-\infty$）。
+
+若极限 
+$$
+\lim_{n \to \infty} \frac{a_{n+1} - a_n}{b_{n+1} - b_n} = l
+$$
+存在（$l$ 可以是有限数、$+\infty$ 或 $-\infty$），则
+
+$$
+\lim_{n \to \infty} \frac{a_n}{b_n} = l
+$$
+
+二、$\frac{0}{0}$ 型 Stolz 定理
+
+设数列 ${b_n}$ 满足：
+
+严格单调递减；
+
+当 $n \to \infty$ 时，$a_n \to 0$ 且 $b_n \to 0$。
+
+若极限
+$$
+\lim_{n \to \infty} \frac{a_{n+1} - a_n}{b_{n+1} - b_n} = l
+$$
+存在($l$ 可以是有限数、$+\infty$ 或 $-\infty$），则
+$$
+\lim_{n \to \infty} \frac{a_n}{b_n} = l
+$$
+这就是极限中差分想法的简单运用，沿着这条路，我们来看这个估计
+
+求极限
+$$
+\lim_{n\to \infty}\frac{\sqrt[n]{n！}}{n}
+$$
+取对数
+$$
+\frac{\sqrt[n]{n}}{n!}=e^{\frac{1}{n}\ln n！-\ln n}
+$$
+由stolz
+$$
+\lim_{n \to \infty}\frac{1}{n}\ln n！-\ln n=
+\lim_{n \to \infty}(n-1)\ln (\frac{n-1}{n})=-1
+$$
+于是
+$$
+\lim_{n\to \infty}\frac{\sqrt[n]{n！}}{n}=\frac{1}{e}
+$$
+也就是$\sqrt[n]{n！}\sim \frac{n}{e}$
+
+接下来，我们将从积分的角度来看这个问题
 ### 和的积分估计
 这个角度要求我们先把 $n!$ 改写为和的形式
 $$
